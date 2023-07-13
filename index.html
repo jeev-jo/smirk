@@ -3,42 +3,52 @@
 <head>
     <title>Smirk Emoji Flashing</title>
     <style>
-        #container {
+        body {
+            margin: 0;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
         }
 
         .emoji {
             font-size: 100px;
             animation: flash 0.5s infinite;
+            opacity: 0;
+        }
+
+        .emoji.static {
+            opacity: 1;
+            animation: none;
         }
 
         @keyframes flash {
             0% {
-                opacity: 1;
-            }
-            50% {
                 opacity: 0;
             }
-            100% {
+            50% {
                 opacity: 1;
+            }
+            100% {
+                opacity: 0;
             }
         }
     </style>
 </head>
 <body>
     <div id="container">
-        <div id="emojiContainer">
-            <span class="emoji">&#x1F60F;</span>
-        </div>
+        <span class="emoji static">&#x1F60F;</span>
     </div>
 
     <script>
         setTimeout(function() {
-            var emojiContainer = document.getElementById("emojiContainer");
+            var emojiContainer = document.getElementById("container");
             emojiContainer.innerHTML = "";
+
+            var firstEmoji = document.createElement("span");
+            firstEmoji.classList.add("emoji", "static");
+            firstEmoji.innerHTML = "&#x1F60F;";
+            emojiContainer.appendChild(firstEmoji);
 
             for (var i = 0; i < 20; i++) {
                 var emoji = document.createElement("span");
