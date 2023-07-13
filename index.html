@@ -16,6 +16,11 @@
             font-size: 100px;
             position: absolute;
             top: -100px;
+            opacity: 0;
+            animation: none;
+        }
+
+        .shower-emoji {
             animation: shower 1s infinite linear;
         }
 
@@ -37,13 +42,25 @@
 <body>
     <script>
         setTimeout(function() {
-            for (var i = 0; i < 20; i++) {
-                var emoji = document.createElement("span");
-                emoji.classList.add("emoji");
-                emoji.innerHTML = "&#x1F60F;";
-                document.body.appendChild(emoji);
-            }
-        }, 3000);
+            var container = document.createElement("div");
+            container.id = "container";
+            document.body.appendChild(container);
+
+            var firstEmoji = document.createElement("span");
+            firstEmoji.classList.add("emoji");
+            firstEmoji.innerHTML = "&#x1F60F;";
+            container.appendChild(firstEmoji);
+
+            setTimeout(function() {
+                firstEmoji.style.animation = "none";
+                for (var i = 0; i < 20; i++) {
+                    var emoji = document.createElement("span");
+                    emoji.classList.add("emoji", "shower-emoji");
+                    emoji.innerHTML = "&#x1F60F;";
+                    container.appendChild(emoji);
+                }
+            }, 3000);
+        }, 0);
     </script>
 </body>
 </html>
