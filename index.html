@@ -9,52 +9,39 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
         }
 
         .emoji {
             font-size: 100px;
-            animation: flash 0.5s infinite;
-            opacity: 0;
+            position: absolute;
+            top: -100px;
+            animation: shower 1s infinite linear;
         }
 
-        .emoji.static {
-            opacity: 1;
-            animation: none;
-        }
-
-        @keyframes flash {
+        @keyframes shower {
             0% {
+                transform: translateY(-100px) rotateZ(0deg);
                 opacity: 0;
             }
             50% {
                 opacity: 1;
             }
             100% {
+                transform: translateY(100vh) rotateZ(720deg);
                 opacity: 0;
             }
         }
     </style>
 </head>
 <body>
-    <div id="container">
-        <span class="emoji static">&#x1F60F;</span>
-    </div>
-
     <script>
         setTimeout(function() {
-            var emojiContainer = document.getElementById("container");
-            emojiContainer.innerHTML = "";
-
-            var firstEmoji = document.createElement("span");
-            firstEmoji.classList.add("emoji", "static");
-            firstEmoji.innerHTML = "&#x1F60F;";
-            emojiContainer.appendChild(firstEmoji);
-
             for (var i = 0; i < 20; i++) {
                 var emoji = document.createElement("span");
                 emoji.classList.add("emoji");
                 emoji.innerHTML = "&#x1F60F;";
-                emojiContainer.appendChild(emoji);
+                document.body.appendChild(emoji);
             }
         }, 3000);
     </script>
