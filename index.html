@@ -12,10 +12,16 @@
             overflow: hidden;
         }
 
+        .emoji-container {
+            position: relative;
+            width: 100px;
+            height: 100px;
+        }
+
         .emoji {
             font-size: 100px;
             position: absolute;
-            top: -100px;
+            top: 0;
             opacity: 0;
             animation: none;
         }
@@ -43,7 +49,7 @@
     <script>
         setTimeout(function() {
             var container = document.createElement("div");
-            container.id = "container";
+            container.classList.add("emoji-container");
             document.body.appendChild(container);
 
             var firstEmoji = document.createElement("span");
@@ -53,6 +59,7 @@
 
             setTimeout(function() {
                 firstEmoji.style.animation = "none";
+
                 for (var i = 0; i < 20; i++) {
                     var emoji = document.createElement("span");
                     emoji.classList.add("emoji", "shower-emoji");
